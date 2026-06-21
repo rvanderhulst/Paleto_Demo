@@ -8,10 +8,10 @@
     <style>
         /* Vernieuwd VelopA Groen Kleurenpalet */
         :root {
-            --velopa-primary: #1A3628; /* Diep donkergroen (ter vervanging van donkerblauw) */
-            --velopa-accent: #91BA21;  /* Frisse VelopA-groen (ter vervanging van oranje) */
-            --velopa-accent-hover: #7A9E1C; /* Iets donkerdere groen voor knop-hovers */
-            --bg-color: #F4F7F5; /* Zeer lichte, zachtgroene achtergrond */
+            --velopa-primary: #1A3628; /* Diep donkergroen */
+            --velopa-accent: #91BA21;  /* Frisse VelopA-groen */
+            --velopa-accent-hover: #7A9E1C; /* Iets donkerdere groen voor hovers */
+            --bg-color: #F4F7F5; /* Zachtgroene achtergrond */
             --text-color: #2E3B32;
         }
 
@@ -27,7 +27,7 @@
         header {
             background-color: #FFFFFF;
             padding: 20px 40px;
-            border-bottom: 3px solid var(--velopa-accent); /* Groene lijn onder de header */
+            border-bottom: 3px solid var(--velopa-accent);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -55,7 +55,7 @@
 
         p.subtitle {
             font-size: 16px;
-            color: #5C6E63; /* Zachte grijs-groene tint */
+            color: #5C6E63;
             margin-bottom: 30px;
         }
 
@@ -66,34 +66,57 @@
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(26, 54, 40, 0.08);
             border: 1px solid #E3EBE6;
+            position: relative; /* Nodig voor absolute positionering van de custom knop */
         }
 
         model-viewer {
             width: 100%;
             height: 65vh;
-            background-color: #EBF0ED; /* Subtiele groengrijze studiovloer */
+            background-color: #EBF0ED;
             border-radius: 6px;
             outline: none;
         }
 
-        /* AR Knop */
+        /* --- STYLING VOOR DE NIEUWE CUSTOM AR KNOP --- */
+        /* Verberg eerst de standaard knop (part) */
         model-viewer::part(default-ar-button) {
+            display: none;
+        }
+
+        /* Style de nieuwe knop (slot) */
+        #custom-ar-button {
             background-color: var(--velopa-accent);
-            color: white;
+            color: white; /* Tekstkleur 'AR' is wit */
             border-radius: 4px;
             border: none;
             padding: 12px 24px;
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
+            position: absolute; /* Plaats hem t.o.v. de .viewer-card */
+            bottom: 40px; /* Een stukje van de bodem van de viewer */
+            right: 40px; /* Een stukje van de rechterkant */
             font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 1px;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(145, 186, 33, 0.4);
-            transition: background-color 0.3s;
+            box-shadow: 0 4px 12px rgba(145, 186, 33, 0.5);
+            transition: background-color 0.3s, transform 0.2s;
+            z-index: 100; /* Zorg dat hij bovenop het model ligt */
+            
+            /* Voor als de knop niet zichtbaar is (hij wordt alleen getoond als AR mogelijk is) */
+            display: none; 
         }
 
-        model-viewer::part(default-ar-button):hover {
+        /* model-viewer laat de knop alleen zien als AR mogelijk is */
+        model-viewer[ar-status="not-presenting"] #custom-ar-button,
+        model-viewer[ar-status="session-started"] #custom-ar-button {
+            display: block;
+        }
+
+        #custom-ar-button:hover {
             background-color: var(--velopa-accent-hover);
+        }
+
+        #custom-ar-button:active {
+            transform: scale(0.97); /* Subtiele klik-animatie */
         }
 
         /* Wachtwoord Overlay Styling */
@@ -191,12 +214,12 @@
         </header>
 
         <div class="container">
-            <h1>Mix Wall Paleto 06</h1>
+            <h1>Mix Wall Paleto 05</h1>
             <p class="subtitle">Interactieve 3D weergave & AR demo voor interne en externe review.</p>
 
             <div class="viewer-card">
                 <model-viewer 
-                    src="P26-00003g_Mix Wall Paleto_06.glb" 
+                    src="P26-00003g_Mix Wall Paleto_05.glb" 
                     ar 
                     ar-modes="webxr scene-viewer quick-look"
                     camera-controls 
@@ -204,6 +227,11 @@
                     shadow-intensity="1.2"
                     environment-image="neutral"
                     exposure="1.0">
+                    
+                    <button slot="ar-button" id="custom-ar-button">
+                        AR
+                    </button>
+                    
                 </model-viewer>
             </div>
         </div>
