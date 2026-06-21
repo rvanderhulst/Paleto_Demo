@@ -8,10 +8,10 @@
     <style>
         /* Vernieuwd VelopA Groen Kleurenpalet */
         :root {
-            --velopa-primary: #1A3628; /* Diep donkergroen */
-            --velopa-accent: #91BA21;  /* Frisse VelopA-groen */
-            --velopa-accent-hover: #7A9E1C; /* Iets donkerdere groen voor hovers */
-            --bg-color: #F4F7F5; /* Zachtgroene achtergrond */
+            --velopa-primary: #1A3628;
+            --velopa-accent: #91BA21;
+            --velopa-accent-hover: #7A9E1C;
+            --bg-color: #F4F7F5;
             --text-color: #2E3B32;
         }
 
@@ -66,7 +66,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(26, 54, 40, 0.08);
             border: 1px solid #E3EBE6;
-            position: relative; /* Nodig voor absolute positionering van de custom knop */
+            position: relative;
         }
 
         model-viewer {
@@ -77,35 +77,30 @@
             outline: none;
         }
 
-        /* --- STYLING VOOR DE NIEUWE CUSTOM AR KNOP --- */
-        /* Verberg eerst de standaard knop (part) */
+        /* Custom AR Knop */
         model-viewer::part(default-ar-button) {
             display: none;
         }
 
-        /* Style de nieuwe knop (slot) */
         #custom-ar-button {
             background-color: var(--velopa-accent);
-            color: white; /* Tekstkleur 'AR' is wit */
+            color: white;
             border-radius: 4px;
             border: none;
             padding: 12px 24px;
-            position: absolute; /* Plaats hem t.o.v. de .viewer-card */
-            bottom: 40px; /* Een stukje van de bodem van de viewer */
-            right: 40px; /* Een stukje van de rechterkant */
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
             font-weight: bold;
             font-size: 16px;
             letter-spacing: 1px;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(145, 186, 33, 0.5);
             transition: background-color 0.3s, transform 0.2s;
-            z-index: 100; /* Zorg dat hij bovenop het model ligt */
-            
-            /* Voor als de knop niet zichtbaar is (hij wordt alleen getoond als AR mogelijk is) */
+            z-index: 100;
             display: none; 
         }
 
-        /* model-viewer laat de knop alleen zien als AR mogelijk is */
         model-viewer[ar-status="not-presenting"] #custom-ar-button,
         model-viewer[ar-status="session-started"] #custom-ar-button {
             display: block;
@@ -116,7 +111,7 @@
         }
 
         #custom-ar-button:active {
-            transform: scale(0.97); /* Subtiele klik-animatie */
+            transform: scale(0.97);
         }
 
         /* Wachtwoord Overlay Styling */
@@ -188,7 +183,6 @@
             margin-bottom: 10px;
         }
         
-        /* Verberg de hoofdcontent bij het laden */
         #main-content {
             display: none;
         }
@@ -214,12 +208,12 @@
         </header>
 
         <div class="container">
-            <h1>Mix Wall Paleto 05</h1>
+            <h1>Mix Wall Paleto 06</h1>
             <p class="subtitle">Interactieve 3D weergave & AR demo voor interne en externe review.</p>
 
             <div class="viewer-card">
                 <model-viewer 
-                    src="P26-00003g_Mix Wall Paleto_05.glb" 
+                    src="P26-00003g_Mix Wall Paleto_06.glb" 
                     ar 
                     ar-modes="webxr scene-viewer quick-look"
                     camera-controls 
